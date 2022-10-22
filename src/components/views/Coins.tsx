@@ -4,7 +4,7 @@ import millify from 'millify'
 import { useQuery } from 'react-query'
 import { GoArrowDown, GoArrowUp } from 'react-icons/go'
 
-import { fetchCoins } from '../../services/coins'
+import { fetchCoins } from '../../services'
 
 const Coins = () => {
     const { status, data } = useQuery(['getCoins'], fetchCoins)
@@ -22,8 +22,7 @@ const Coins = () => {
 
                     newAsset.isGrowing = newValue > oldValue
                     newAsset.isShrinking = newValue < oldValue
-
-                    newAsset.priceUsd = parseFloat(socketAssets[key])
+                    newAsset.priceUsd = newValue
                 }
             })
 
@@ -66,7 +65,7 @@ const Coins = () => {
                     name="coin-query"
                     id="coin-query"
                     className="block w-full rounded-md border-ce-purple-300 shadow-sm py-2 px-2 outline-none bg-ce-purple-500 focus:bg-ce-purple-300 focus:text-ce-purple-700 focus:placeholder:text-ce-purple-700"
-                    placeholder="Search by Name or Symbol"
+                    placeholder="Search by Coin Name or Symbol"
                     onChange={(e) => setSearch(e.target.value)}
                     value={search}
                 />
@@ -97,10 +96,10 @@ const Coins = () => {
                 <tbody className="divide-y divide-ce-purple-700 text-md text-left bg-ce-purple-400 text-black rounded-lg">
                     {formattedAssets.map((asset: any) => (
                         <tr key={asset.id}>
-                            <td className="whitespace-nowrap px-3 py-2 capitalize w-[30px]">
+                            <td className="whitespace-nowrap px-3 py-2 capitalize w-[20px]">
                                 {asset.rank}
                             </td>
-                            <td className="whitespace-nowrap px-3 py-2 flex items-center">
+                            <td className="whitespace-nowrap px-3 py-2 flex items-center text-ellipsis overflow-hidden">
                                 <img
                                     className="inline-block h-10 w-10 rounded-full mr-2"
                                     src={`https://assets.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`}
