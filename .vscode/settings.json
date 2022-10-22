@@ -1,0 +1,8 @@
+{
+    "eslint.workingDirectories": ["./"],
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.packageManager": "yarn"
+}
